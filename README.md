@@ -11,4 +11,5 @@ Do not use, this is actually unstable.
     --file        path              Selecte a specific file
     --help        command           Show support about wpc, use arg to point command details
 
-# Report bugs at : https://github.com/random
+# Report
+Well this is full of bugs so... I will see later
