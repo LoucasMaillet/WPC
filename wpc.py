@@ -3,7 +3,6 @@
 import sys
 import os
 import regex as re
-#import re
 import _thread
 import time
 import json
@@ -25,10 +24,38 @@ if os.path.isfile("conf.json"):
 
 
 def saveConf():
+    """
+
+    Description
+    ----------
+    Save configuration.
+
+    """
     open("conf.json", "w").write(json.dumps(conf, indent=2))
 
 
-def load(text, func, args=()):
+def load(text: str, func: callable, args: tuple = ()):
+    """
+
+    Description
+    ----------
+    Wrap a function with a loading animation.
+
+    Parameters
+    ----------
+    text : STRING
+        Text to show next to the animation.
+    func : CALLABLE
+        Function to wrap with animation.
+    args : TUPLE <optional>
+        Arguments of the function.
+
+    Returns
+    ----------
+    res : UNKNOW TYPE
+        The results of the function executed.
+
+    """
     frame = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
     lFrame = len(frame)
     idFrame = 0
@@ -66,14 +93,50 @@ def load(text, func, args=()):
 
 
 def getFile():
+    """
+
+    Description
+    ----------
+    Read file.
+
+    Returns
+    ----------
+    STRING
+        File content.
+
+    """
     return open(f"src/{conf['file']}").read()
 
 
-def saveFile(data):
+def saveFile(data : str):
+    """
+
+    Description
+    ----------
+    Save file.
+
+    """
     open(f"release/{conf['file']}", "w").write(data)
 
 
-def setExtern(data):
+def setExtern(data : str):
+    """
+
+    Description
+    ----------
+    Get extern ressource from file by filePath.
+
+    Parameters
+    ----------
+    data : STRING
+        FileContent to add extern fileContent.
+
+    Returns
+    ----------
+    data : STRING
+        FileContent transformed.
+
+    """
     links = re.findall(
         r"(?=\<link).*?(?<=\>)|(?=\<script).*?(?<=\<\/script\>)", data)
 
@@ -100,25 +163,67 @@ def setExtern(data):
 
 
 def setVar(data):
+    """
+
+    Description
+    ----------
+    Transform <#key> by key value in vars in conf.json.
+
+    Parameters
+    ----------
+    data : STRING
+        FileContent to change his variable.
+
+    Returns
+    ----------
+    data : STRING
+        FileContent transformed.
+
+    """
     for key in conf['vars']:
         data = data.replace(f"<#{key}>", conf['vars'][key])
     return re.sub(r"(?<=\<\#).*?(?=\>)", "unknow", data)
 
 
-def removeComment(data):
-    toAvoid = "\n".join([s[0] for s in re.findall(
-        r"\"(.*?)\"|\'(.*?)\'|\`(.*?)\`|\/(.*?)\/", data) if s[0] != ""])
-    for c in re.findall(r"(?s)(?=\/\/).*?(?<=\n)", data):
-        if c[:-5] not in toAvoid:
-            data = re.sub(c, "", data)
-    return data
-
-
 def removeDescription(data):
+    """
+
+    Description
+    ----------
+    Remove javascript/css description ("/* ... */") and html description ("<!-- ... -->").
+
+    Parameters
+    ----------
+    data : STRING
+        FileContent to remove his description.
+
+    Returns
+    ----------
+    data : STRING
+        FileContent transformed.
+
+    """
     return re.sub(r"(?s)(?=\/\*).*?(?<=\*\/)|(?=\<\!\-\-).*?(?<=\-\-\>)", "", data)
 
 
 def removeUseless(data):
+    """
+
+    Description
+    ----------
+    Remove useless chacraters (\r\n, \n, \r, \t, \s+).
+
+    Parameters
+    ----------
+    data : STRING
+        FileContent to remove useless characters.
+
+    Returns
+    ----------
+    data : STRING
+        FileContent transformed.
+
+    """
     return re.sub(r"\s+", " ", re.sub(r"\r\n|\n|\r|\t", "", data))
 
 
@@ -126,6 +231,13 @@ def removeUseless(data):
 
 
 def chooseFile():
+    """
+
+    Description
+    ----------
+    Select a specific filePath.
+
+    """
     if len(args) >= 1:
         if not os.path.isfile(f"src/{args[0]}"):
             print(
@@ -138,7 +250,13 @@ def chooseFile():
 
 
 def new():
+    """
 
+    Description
+    ----------
+    Re/Generate a new WPC environment.
+
+    """
     if len(args) == 1:
         global conf
         conf = {
@@ -169,6 +287,13 @@ def new():
 
 
 def build():
+    """
+
+    Description
+    ----------
+    Build a new webpage.
+
+    """
     print("Compiling ...")
     data = load("Get file", getFile,)
     cArg = "".join(arg for arg in args if arg[0] == "%")
@@ -179,8 +304,6 @@ def build():
         data = load("Set variables from conf.json (%v)", setVar, (data,))
     if "d" not in cArg:
         data = load("Remove description (%d)", removeDescription, (data,))
-    if "c" not in cArg:
-        data = load("Remove comment (%c)", removeComment, (data,))
     if "u" not in cArg:
         data = load("Remove useless characters (%u)", removeUseless, (data,))
 
@@ -189,8 +312,15 @@ def build():
 
 
 def help():
+    """
+
+    Description
+    ----------
+    Show a help support.
+
+    """
     if (len(args) == 0):
-        print("Web Page Compiler (v0.1)\n\nUsage:\n    --command \033[3m [arguments]\033[0m\n\nCommands:\n{cmd}\n\nReport bugs at : \033[3mhttps://github.com/random\033[0m"
+        print("Web Page Compiler (v0.1)\n\nUsage:\n    --command \033[3m [arguments]\033[0m\n\nCommands:\n{cmd}\n\nReport bugs at : \033[3mhttps://github.com/LoucasMaillet/WPC\033[0m"
               .format(cmd='\n'.join(f"""{f'    {cmd}'.ljust(18)}\033[3m{f"{' '.join([arg for arg in commands[cmd]['args']])}".ljust(18)}{commands[cmd]["desc"]}\033[0m""" for cmd in commands)))
     else:
         for cmd in args:
@@ -207,7 +337,7 @@ def help():
 
 commands = {
     "--new": {"func": new,  "args": {"name": "Project name"}, "desc": "Create new wpc environment"},
-    "--build": {"func": build, "args": {"%r": "Skip using ressources from files", "%v": "Skip using variables of conf.json", "%d": "Skip removing descriptions", "%c": "Skip removing comments", "%u": "Skip removing useless characters"}, "desc": "Compile code, use arg to skip specific step"},
+    "--build": {"func": build, "args": {"%r": "Skip using ressources from files", "%v": "Skip using variables of conf.json", "%d": "Skip removing descriptions", "%u": "Skip removing useless characters"}, "desc": "Compile code, use arg to skip specific step"},
     "--file": {"func": chooseFile,  "args": {"path": "Path of specific file"}, "desc": "Selecte a specific file"},
     "--help": {"func": help,  "args": {"command": "Show this help"}, "desc": "Show support about wpc, use arg to point command details"},
 }
