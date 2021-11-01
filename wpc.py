@@ -349,7 +349,7 @@ def help():
 
 commands = {
     "--new": {"func": new,  "args": {"name": "Project name"}, "desc": "Create new wpc environment"},
-    "--build": {"func": build, "args": {"%r": "Skip using ressources from files", "%v": "Skip using variables of conf.json", "%d": "Skip removing descriptions", "%u": "Skip removing useless characters"}, "desc": "Compile code, use arg to skip specific step"},
+    "--build": {"func": build, "args": {"%r": "Skip using ressources from files", "%v": "Skip using variables of conf.json", "%d": "Skip removing descriptions", "%u": "Skip removing useless characters"}, "desc": "Compress code, use arg to skip specific step"},
     "--file": {"func": chooseFile,  "args": {"path": "Path of specific file"}, "desc": "Selecte a specific file"},
     "--help": {"func": help,  "args": {"command": "Show this help"}, "desc": "Show support about wpc, use arg to point command details"},
 }
