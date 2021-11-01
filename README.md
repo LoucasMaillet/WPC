@@ -1,5 +1,5 @@
 # WPC
-Web Page Compiler (v0.1)
+Web Page Compressor (v0.1)
 Do not use, this is actually unstable.
 
 # Usage:
