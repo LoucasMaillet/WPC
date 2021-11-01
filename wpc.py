@@ -1,4 +1,16 @@
 #!/usr/bin/python3.8
+"""
+Web Page Compressor (v0.1)
+==========================
+
+[Dependencies]
+regex : pip install regex
+json : pip install json
+
+Wep Page Compressor is a Python command line util who can compres html/css/js,
+it's usefull to build only one page website.
+"""
+
 
 import sys
 import os
@@ -320,7 +332,7 @@ def help():
 
     """
     if (len(args) == 0):
-        print("Web Page Compiler (v0.1)\n\nUsage:\n    --command \033[3m [arguments]\033[0m\n\nCommands:\n{cmd}\n\nReport bugs at : \033[3mhttps://github.com/LoucasMaillet/WPC\033[0m"
+        print("Web Page Compressor (v0.1)\n\nUsage:\n    --command \033[3m [arguments]\033[0m\n\nCommands:\n{cmd}\n\nReport bugs at : \033[3mhttps://github.com/LoucasMaillet/WPC\033[0m"
               .format(cmd='\n'.join(f"""{f'    {cmd}'.ljust(18)}\033[3m{f"{' '.join([arg for arg in commands[cmd]['args']])}".ljust(18)}{commands[cmd]["desc"]}\033[0m""" for cmd in commands)))
     else:
         for cmd in args:
