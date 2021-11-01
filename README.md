@@ -7,7 +7,7 @@ Do not use, this is actually unstable.
 
 # Commands:
     --new         name              Create new wpc environment
-    --build       %r %v %d %c %u    Compile code, use arg to skip specific step
+    --build       %r %v %d %u    Compile code, use arg to skip specific step
     --file        path              Selecte a specific file
     --help        command           Show support about wpc, use arg to point command details
 
