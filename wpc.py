@@ -14,7 +14,7 @@ it's usefull to build only one page website.
 
 import sys
 import os
-import regex as re
+import re
 import _thread
 import time
 import json
@@ -120,7 +120,7 @@ def getFile():
     return open(f"src/{conf['file']}").read()
 
 
-def saveFile(data : str):
+def saveFile(data: str):
     """
 
     Description
@@ -131,7 +131,7 @@ def saveFile(data : str):
     open(f"release/{conf['file']}", "w").write(data)
 
 
-def setExtern(data : str):
+def setExtern(data: str):
     """
 
     Description
@@ -159,10 +159,8 @@ def setExtern(data : str):
         filePath = f"src/{filePath}"
 
         if os.path.isfile(filePath):
-
-            content = str(open(filePath, 'rb').read())[
-                2:-1].replace("\\'", "'")
-
+            content = re.sub(r"""', '|", "|', "|", '""" , "",str(open(filePath, "r").readlines())[
+                2:-2].replace("\\'", "'"))
             if "stylesheet" in link:
                 data = re.sub(
                     link, f"<style>\n{content}\n</style>", data)
