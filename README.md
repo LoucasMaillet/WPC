@@ -1,6 +1,6 @@
 # WPC
 Web Page Compressor (v0.2)
-Do not use, this is actually unstable.
+This is a vanilla Python command line utils to create one page website.
 
 # Usage:
     --command  [arguments]
@@ -12,4 +12,4 @@ Do not use, this is actually unstable.
     --help        command           Show support about wpc, use arg to point command details
 
 # Report
-Well this is full of bugs so... I will see later
+Well the code wasn't correctly writte... So I will see later
