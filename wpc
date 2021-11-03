@@ -166,7 +166,7 @@ def setExtern(data: str):
 
             content = re.sub(r"""', '|", "|', "|", '""" , "",str(open(filePath, "r").readlines())[
                 2:-2].replace("\\'", "'"))
-                
+
             if "stylesheet" in link:
                 data = re.sub(
                     link, f"<style>\n{content}\n</style>", data)
@@ -313,8 +313,8 @@ def build():
     print("Compiling ...")
     data = load("Get file", getFile,)
     cArg = "".join(arg for arg in args if arg[0] == "%")
-    if "r" not in cArg:
-        data = load("Set externs ressources from files (%l)",
+    if "e" not in cArg:
+        data = load("Set externs ressources from files (%e)",
                     setExtern, (data,))
     if "v" not in cArg:
         data = load("Set variables from conf.json (%v)", setVar, (data,))
@@ -353,7 +353,7 @@ def help():
 
 commands = {
     "--new": {"func": new,  "args": {"name": "Project name"}, "desc": "Create new wpc environment"},
-    "--build": {"func": build, "args": {"%r": "Skip using ressources from files", "%v": "Skip using variables of conf.json", "%d": "Skip removing descriptions", "%u": "Skip removing useless characters"}, "desc": "Compress code, use arg to skip specific step"},
+    "--build": {"func": build, "args": {"%e": "Skip using ressources from files", "%v": "Skip using variables of conf.json", "%d": "Skip removing descriptions", "%u": "Skip removing useless characters"}, "desc": "Compress code, use arg to skip specific step"},
     "--file": {"func": chooseFile,  "args": {"path": "Path of specific file"}, "desc": "Selecte a specific file"},
     "--help": {"func": help,  "args": {"command": "Show this help"}, "desc": "Show support about wpc, use arg to point command details"},
 }
