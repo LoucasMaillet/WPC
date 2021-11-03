@@ -159,8 +159,14 @@ def setExtern(data: str):
         filePath = f"src/{filePath}"
 
         if os.path.isfile(filePath):
+
+            # TODO
+            # Find a better solution to differentiate "\n" and real newline
+            # than this one which is really, REALLY ugly:
+
             content = re.sub(r"""', '|", "|', "|", '""" , "",str(open(filePath, "r").readlines())[
                 2:-2].replace("\\'", "'"))
+                
             if "stylesheet" in link:
                 data = re.sub(
                     link, f"<style>\n{content}\n</style>", data)
