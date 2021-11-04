@@ -1,7 +1,6 @@
 # WPC
 
-Web Page Compressor (v0.2).
-This is a vanilla Python command line utils to create one page website.
+Web Page Compressor (v0.2) is a vanilla Python command line utils to create one page website.
 
 # Usage:
     --command  [arguments]
