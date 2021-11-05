@@ -18,6 +18,7 @@ import re
 import _thread
 import time
 import json
+from datauri import DataURI
 
 args = []
 conf = {
@@ -164,10 +165,19 @@ def setExtern(data: str):
             # Find a better solution to differentiate "\n" and real newline
             # than this one which is really, REALLY ugly:
 
-            content = re.sub(r"""', '|", "|', "|", '""" , "",str(open(filePath, "r").readlines())[
+            content = re.sub(r"""', '|", "|', "|", '""", "", str(open(filePath, "r").readlines())[
                 2:-2].replace("\\'", "'"))
 
             if "stylesheet" in link:
+
+                subFilePaths = re.findall(
+                    r"(?<=url\(\").*?(?=\"\))", content)
+
+                for subFilePath in subFilePaths:
+                    subContent = DataURI.from_file(f"src/{subFilePath}")
+                    content = re.sub(
+                        f"{subFilePath}", f"{str(subContent)}", content)
+
                 data = re.sub(
                     link, f"<style>\n{content}\n</style>", data)
 
