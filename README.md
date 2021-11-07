@@ -1,15 +1,18 @@
-# WPC
+# What is this ?
 
 Web Page Compressor (v0.2) is a Python command line utils to create one page website.
 
 # Usage:
-    --command  [arguments]
+wpc [-h] [-n webpage] [-b [mode]] [filePath]
 
-# Commands:
-    --new         name              Create new wpc environment
-    --build       %r %v %d %u       Compile code, use arg to skip specific step
-    --file        path              Selecte a specific file
-    --help        command           Show support about wpc, use arg to point command details
+# Positional arguments:
+  filePath              Path of main file.
 
+# Optional arguments:
+  -h, --help            show this help message and exit
+  -n webpage, --new webpage
+                        Generate new WPC environment..
+  -b [mode], --build [mode]
+                        Build webpage.
 # Report
 Well the code wasn't correctly writte... So I will see later
