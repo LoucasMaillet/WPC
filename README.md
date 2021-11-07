@@ -1,6 +1,6 @@
 # What is this ?
 
-Web Page Compressor (v0.2) is a Python command line utils to create one page website.
+Web Page Compressor is a Python command line utils to create one page website.
 
 # What wasn't finish:
 
