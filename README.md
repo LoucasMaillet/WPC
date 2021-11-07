@@ -2,7 +2,7 @@
 
 Web Page Compressor (v0.2) is a Python command line utils to create one page website.
 
-# What isn't finished:
+# What wasn't finish:
 
 WPC didn't support "//" comments.
 
