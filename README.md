@@ -8,11 +8,11 @@ WPC didn't support "//" comments.
 
 # Table of Contents
 
-* [Install](#install)
+* [Installation](#installation)
 * [Help](#help)
 * [Reports](#reports)
 
-# Install
+# Installation
 
 With pip:
 
