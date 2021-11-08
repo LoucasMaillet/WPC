@@ -8,8 +8,16 @@ WPC didn't support "//" comments.
 
 # Table of Contents
 
+* [Install](#install)
 * [Help](#help)
 * [Reports](#reports)
+
+# Install
+
+With pip:
+```
+pip install webpage-compressor
+```
 
 # Help
 
@@ -28,6 +36,6 @@ optional arguments:
                         Build webpage.
 ```
 
-# Report
+# Reports
 
 Well the code wasn't rigth writed... So I will see later.
