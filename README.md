@@ -15,6 +15,7 @@ WPC didn't support "//" comments.
 # Install
 
 With pip:
+
 ```
 pip install webpage-compressor
 ```
