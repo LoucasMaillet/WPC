@@ -1,6 +1,6 @@
 # What is this ?
 
-Web Page Compressor is a Python CLI to create one page website.
+Web Page Compressor is a Python CLI to create one file webpage.
 
 # What wasn't finish:
 
