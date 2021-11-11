@@ -149,20 +149,20 @@ def setExtern(data: str) -> str:
 
     for link in links:
 
-        filePath = re.findall(
-            r'(?<=href\=\").*?(?=\")|(?<=src\=\").*?(?=\")', link)[0]
+        [filePath] = re.findall(
+            r'(?<=href\=\").*?(?=\")|(?<=src\=\").*?(?=\")', link)
         filePath = f"src/{filePath}"
-
+        
         if os.path.isfile(filePath):
-
+            pass
             # TODO
             # Find a better solution to differentiate "\n" and real newline
             # than this one which is really, REALLY ugly:
-
-            content = re.sub(r"""', '|", "|', "|", '""", "", str(open(filePath, "r").readlines())[
-                2:-2].replace("\\'", "'"))
-
+            # data = re.sub(link, f"<link rel='icon' href='{DataURI.from_file(filePath)}'/>", data)
+            
             if "stylesheet" in link:
+                content = re.sub(r"""', '|", "|', "|", '""", "", str(open(filePath, "r").readlines())[
+                    2:-2].replace("\\'", "'"))
 
                 subFilePaths = re.findall(
                     r"(?<=url\(\").*?(?=\"\))", content)
@@ -176,9 +176,17 @@ def setExtern(data: str) -> str:
                     link, f"<style>\n{content}\n</style>", data)
 
             elif "script" in link:
+                content = re.sub(r"""', '|", "|', "|", '""", "", str(open(filePath, "r").readlines())[
+                    2:-2].replace("\\'", "'"))
+
                 data = re.sub(
                     link, f"<script>{content}</script>", data)
 
+            elif "icon" in link:
+
+                data = re.sub(
+                    link, f"<link rel='icon' href='{DataURI.from_file(filePath)}'/>", data)
+            
     return data
 
 
